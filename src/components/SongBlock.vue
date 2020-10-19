@@ -1,4 +1,5 @@
 <template>
+<ul class="player-list">
   <li
     :style="'background'"
     :class="
@@ -8,19 +9,19 @@
     "
     @click="$emit('playItem')"
   >
-    <img class="song-cover" :src="song.cover" />
-    {{ count + 1 + ". "
-    }}<span class="tittle tw-z-40">{{ song.tittle }}</span> -
-    <span class="tw-font-bold tw-z-40">{{ song.artist }}</span>
-    {{ currentTrackId === count ? "" : "" }}
-    <span
-      :style="
-        'background: rgba(0,255,0, .2); width: ' +
-          (currentTrackTime / currentTrackDuration) * 100 +
-          '%;'
-      "
-    ></span>
+  <!-- {{ count + 1 + ". "
+    }}<span class="tittle tw-z-40"></span> -
+    {{ currentTrackId === count ? "" : "" }} -->
+    <img class="list-cover" :src="song.cover" />
+    <div class="list-info">
+      
+      <div class="info-title info-title-artist">{{ song.artist }}</div>
+      <div class="info-title">{{ song.tittle }}</div>
+    
+   
+    </div>
   </li>
+  </ul>
 </template>
 
 <script>
@@ -32,7 +33,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .song-cover {
   width: 100%;
   height: 100%;
@@ -42,4 +43,14 @@ export default {
   left: 0;
   padding: 0;
 }
+.player-list {
+  &:hover {
+    background: #e2e8f0;
+  }
+}
+.info-title-artist{
+font-weight: bold;
+font-size:14px;
+}
+
 </style>

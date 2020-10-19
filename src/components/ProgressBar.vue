@@ -164,7 +164,7 @@ export default {
 }
 *,
 *:hover {
-  cursor: default;
+  cursor: pointer;
 }
 .player-progress-wrapper {
   position: inherit;

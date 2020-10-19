@@ -1,7 +1,6 @@
 <template>
   <div
     v-if="songs && songs.length > 0"
-    class="tw-flex tw-flex-wrap sm:tw-flex-no-wrap tw-flex-col sm:tw-flex-row xl:tw-flex-row sm:tw-items-start tw-m-2 tw-p-2"
   >
     <div>
       <PersistentPlayer />
@@ -37,7 +36,7 @@ export default {
 };
 </script>
 
-<style scopped>
+<style lang="scss">
 .vue-progress-circle {
   width: fit-content !important;
   width: -moz-fit-content !important;
@@ -63,10 +62,12 @@ h3 {
   font-weight: 800;
 }
 .songs {
+  padding-top: 20px;
   margin-left: 0.5rem;
   margin-top: 0;
   list-style: none;
   margin: 0;
   padding: 0;
+  
 }
 </style>

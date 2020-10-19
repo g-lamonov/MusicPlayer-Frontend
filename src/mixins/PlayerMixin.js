@@ -6,9 +6,9 @@ const PlayerMixin = {
       progressBgColor: "#ffffff",
       hidePlayer: true,
       progressHeightMain: 8,
-      volumeHeightMain: 8,
+      volumeHeightMain: 3,
       progressHeightPersistent: 15,
-      volumeHeightPersistent: 5,
+      volumeHeightPersistent: 9,
     };
   },
   watch: {

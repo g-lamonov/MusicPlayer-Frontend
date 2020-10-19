@@ -1,11 +1,18 @@
 <template>
   <div v-if="songs && songs.length > 0">
     <div>
-      <section>
-        <footer id="interactions">
+      <section class="player-main">
+        <div class="main-current">
+          <div class="current-keyvisual">
+            <img class="song-cover" :src="songs[currentTrackId].cover" />
+          </div>
+          <div class="current-info">
+            <h1>{{ songs[currentTrackId].artist }}</h1>
+            <p>{{ songs[currentTrackId].tittle }}</p>
+          </div>
+        </div>
+        <footer>
           <div class="tracking-wrap">
-            <span class="song-current-time">--:--</span>
-
             <ProgressBar
               style="background:#ebebeb;"
               :bar-height="progressHeightPersistent"
@@ -16,29 +23,21 @@
               :total-value="currentTrackDuration"
               @seekedTo="seekToTime"
             />
+          </div>
+
+          <div class="controls-bar">
             <span class="song-length"
               >{{ currentTrackTime | doubleDigits }} -
               {{ currentTrackDuration | doubleDigits }}</span
             >
-          </div>
-
-          <div class="controls-bar">
             <section id="controls">
-              <span class="fa fa-random shuffle"></span>
-              <div
-                class="tw-flex-1 tw-m-1 tw-justify-center tw-align-middle"
-                @click="playPrevSong()"
-              >
-                <SkipBackwardIcon
-                  class="tw-cursor-pointer tw-text-white"
-                  w="30"
-                  h="30"
-                />
+              <div @click="playPrevSong()">
+                <SkipBackwardIcon class="icon-prev" w="30" h="30" />
               </div>
-              <div class="tw-flex-1 tw-m-1 tw-justify-center tw-align-middle">
+              <div>
                 <span @click="playCurrentSong()">
                   <PlayIcon
-                    class="tw-cursor-pointer tw-text-white"
+                    class="icon-play"
                     v-show="!isPlaying && !playerIsLoading"
                     w="30"
                     h="30"
@@ -46,37 +45,28 @@
                 </span>
                 <span @click="pauseSong()">
                   <PauseIcon
-                    class="tw-cursor-pointer tw-text-white"
+                    class="icon-pause"
                     v-show="isPlaying && !playerIsLoading"
                     w="30"
                     h="30"
                   />
                 </span>
-                <span>
-                  <BufferingIcon
-                    class="tw-text-white tw-cursor-pointer"
-                    animate="beat"
-                    v-show="playerIsLoading"
-                    w="30"
-                    h="30"
-                  />
-                </span>
               </div>
 
-              <div
-                class="tw-flex-1 tw-m-1 tw-justify-center tw-align-middle"
-                @click="playNextSong()"
-              >
+              <div @click="playNextSong()">
                 <SkipForwardIcon
-                  class="tw-cursor-pointer tw-text-white"
+                  class="icon-next"
                   w="30"
                   h="30"
                 />
               </div>
-              <span class="fa fa-repeat repeat on"></span>
             </section>
 
-            <div id="volume" class="volume-slider" style="width: 10vw;">
+            <div
+              id="volume"
+              class="volume-slider"
+              style="width: 10vw; max-width: 100px;"
+            >
               <ProgressBar
                 style="background:#ebebeb;"
                 @seekedTo="changeVolume"
@@ -91,53 +81,6 @@
           </div>
         </footer>
       </section>
-
-      <audio id="player"></audio>
-    </div>
-    <div class="music-bar">
-      <div class="music-bar-btns">
-        <i
-          class="pointer iconfont icon-prev"
-          title="上一曲 Ctrl + Left"
-          style="font-size: 36px;"
-        ></i>
-        <div title="播放暂停 Ctrl + Space" class="control-play pointer">
-          <i class="iconfont icon-play" style="font-size: 24px;"></i>
-        </div>
-        <i
-          class="pointer iconfont icon-next"
-          title="下一曲 Ctrl + Right"
-          style="font-size: 36px;"
-        >
-        </i>
-      </div>
-      <i
-        class="icon-color pointer mode iconfont icon-loop"
-        title="列表循环 Ctrl + O"
-        style="font-size: 30px;"
-      ></i
-      ><i
-        class="icon-color pointer comment iconfont icon-comment"
-        style="font-size: 30px;"
-      ></i>
-      <div title="音量加减 [Ctrl + Up / Down]" class="music-bar-volume">
-        <div data-v-d34f3866="" class="volume">
-          <i
-            data-v-d34f3866=""
-            class="pointer volume-icon iconfont icon-volume"
-            style="font-size: 30px;"
-          ></i>
-          <div data-v-d34f3866="" class="volume-progress-wrapper">
-            <div data-v-d34f3866="" class="mmProgress">
-              <div class="mmProgress-bar"></div>
-              <div class="mmProgress-outer"></div>
-              <div class="mmProgress-inner" style="width: 89.6px;">
-                <div class="mmProgress-dot"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -155,8 +98,8 @@ import PauseIcon from "vue-ionicons/dist/ios-pause";
 import SkipForwardIcon from "vue-ionicons/dist/ios-skip-forward";
 // import CloseIcon from "vue-ionicons/dist/md-close-circle.vue";
 // import RevealIcon from "vue-ionicons/dist/ios-arrow-up.vue";
-import BufferingIcon from "vue-ionicons/dist/ios-refresh-circle";
 import PlayerMixin from "./../mixins/PlayerMixin";
+import SongBlock from "./SongBlock";
 Vue.use(VTooltip);
 Vue.use(ProgressBar);
 export default {
@@ -171,7 +114,6 @@ export default {
     SkipForwardIcon,
     // CloseIcon,
     // RevealIcon,
-    BufferingIcon,
   },
   mixins: [PlayerMixin],
 };
@@ -744,7 +686,7 @@ body {
 
 #volume {
   max-width: 10vw;
-  padding: 20px 5% 0 0;
+  padding: 20px 0 0 0;
   display: flex;
   align-items: center;
 
@@ -760,5 +702,56 @@ body {
     width: 10vw;
     margin: 0 1vw;
   }
+}
+
+.icon {
+  @at-root #{&}-play {
+    color: #000000;
+    cursor: pointer;
+    &:hover {
+      color: #333333;
+    }
+  }
+  @at-root #{&}-next {
+    color: #000000;
+    cursor: pointer;
+    &:hover {
+      color: #333333;
+    }
+  }
+  @at-root #{&}-prev {
+    color: #000000;
+    cursor: pointer;
+    &:hover {
+      color: #333333;
+    }
+  }
+  @at-root #{&}-pause {
+    color: #000000;
+    cursor: pointer;
+    &:hover {
+      color: #333333;
+    }
+  }
+}
+.song-length {
+  color: black;
+  margin-top: 22px;
+  min-width: 100px;
+}
+.border {
+  border-style: groove;
+  border-color: currentColor;
+  padding: 10px 10px 0px 10px;
+}
+
+.song-cover {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  max-height: 80px;
+  min-height: 80px;
+  object-fit: cover;
 }
 </style>

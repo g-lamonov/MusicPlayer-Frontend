@@ -1,16 +1,6 @@
 <template>
-  <div class="app">
-    <div class="route-container">
-      <div class="tw-flex tw-flex-col tw-items-center tw-mt-4">
-        <div class="tw-inline-flex tw-flex-col tw-items-center">
-          <div class="tw-inline-flex tw-flex-row"></div>
-          <div
-            class="tw-inline-flex tw-flex-row tw-items-center tw-align-middle tw-mt-2"
-          ></div>
-        </div>
-      </div>
+  <div class="music-player">
       <router-view />
-    </div>
   </div>
 </template>
 
@@ -122,6 +112,7 @@ export default {
   -motw-z-osx-tw-font-smoothing: grayscale;
   tw-text-align: center;
   color: #2c3e50;
+  background-color: #dfdfdf;
   margin-top: 60px;
   padding-top: 4.5rem;
   height: 100%;

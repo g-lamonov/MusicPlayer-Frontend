@@ -1,14 +1,14 @@
 <template>
-  <ol style="list-style: none;">
+  <div>
     <song-block
-      class="song"
+      class="player-list"
       v-for="(song, key) in Songs"
       :song="song"
       :count="key"
       :key="key"
       @playItem="$emit('playSelectSong', key)"
     ></song-block>
-  </ol>
+  </div>
 </template>
 
 <script>

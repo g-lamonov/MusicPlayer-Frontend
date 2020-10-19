@@ -88,7 +88,7 @@ export default new Vuex.Store({
         // abort current player progress
         state.audio.load();
 
-        state.playerIsLoading = true; // show player loading animation on UI
+        // state.playerIsLoading = true; 
 
         state.currentTrackId = payload.trackId || state.currentTrackId; // update current track id
         state.audio.src = state.songs[state.currentTrackId].audio;
