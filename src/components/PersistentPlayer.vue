@@ -131,13 +131,13 @@ export default {
   .music-content {
     display: flex;
     width: 100%;
-    height: calc("100% - 80px");
+    // height: calc("100% - 80px");
     .music-left {
       flex: 1;
       height: 100%;
       overflow: hidden;
       .music-list {
-        height: calc("100% - 60px");
+        // height: calc("100% - 60px");
       }
     }
     .music-right {
@@ -419,7 +419,7 @@ body {
     img {
       position: absolute;
       width: 90%;
-      height: calc(20vw * 0.9);
+      // height: calc(20vw * 0.9);
       border-radius: 50%;
       transform-origin: 50% 50%;
     }
@@ -428,8 +428,8 @@ body {
       content: "";
       position: absolute;
       z-index: 10;
-      top: calc(50% - 2vw);
-      left: calc(50% - 2vw);
+      // top: calc(50% - 2vw);
+      // left: calc(50% - 2vw);
       background: $metal90;
       height: 4vw;
       width: 4vw;
@@ -495,8 +495,8 @@ body {
             font-family: FontAwesome;
             height: 26px;
             width: 26px;
-            top: calc(50% - 13px);
-            left: calc(50% - 13px);
+            // top: calc(50% - 13px);
+            // left: calc(50% - 13px);
             z-index: 3;
             font-size: 1em;
             color: $metal5;

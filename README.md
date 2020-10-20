@@ -1,24 +1,9 @@
-# player
+# Music player
 
-## Project setup
-```
-npm install
-```
+Simple music player - created using Vue.    
+[Click here](https://g-lamonov.github.io/MusicPlayer-Frontend/dist/#/) for a link to the demo.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Screenshot
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Homepage
+![forum homepage](https://i.imgur.com/46PatmJ.png)
